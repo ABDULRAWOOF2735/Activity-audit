@@ -1,218 +1,195 @@
-# EXPERIMENT 4
+# EXPERIMENT 4 - AUDITING CLOUD ACTIVITY USING AWS CLOUDTRAIL
 
-## ASSET-ORIENTED RISK ASSESSMENT OF STORAGE ASSETS IN AWS 
+## OBJECTIVE
 
-
-## Aim
-
-To identify storage assets in **AWS S3**, identify possible vulnerabilities and threats, and assess their likelihood, impact, and risk level.
-
-
-## Software / Cloud Services Required
-
-- AWS Account
-- Microsoft Azure Account
-- Web Browser
-- Internet Connection
-
-### Cloud Services Used
-
-| Cloud Platform | Storage Service |
-|---|---|
-| AWS | Amazon S3 |
+To audit and monitor cloud activity in AWS using AWS CloudTrail by viewing and analyzing recorded AWS events and identifying important audit information such as user identity, event name, event time, AWS service, region, and operation status.
 
 ---
 
-# PART A — AWS S3 STORAGE ASSESSMENT
+## REQUIREMENTS
+
+* AWS Account
+* Web Browser
+* Internet Connection
+* Amazon S3 Access
+* AWS CloudTrail
+
+---
+
+# PART A - ACCESS AWS CLOUDTRAIL
 
 ## Step 1: Login to AWS
 
 1. Open the AWS Management Console.
 2. Sign in using your AWS account.
-3. Search for **S3**.
-4. Select **Amazon S3**.
+3. In the AWS search bar, type **CloudTrail**.
+4. Select **AWS CloudTrail**.
+
+<img width="1904" height="935" alt="image" src="https://github.com/user-attachments/assets/b7390736-44c2-4c1e-8577-6b2d7f3f0d3f" />
+
+
+## Step 2: Open Event History
+
+1. In the CloudTrail navigation menu, select **Event history**.
+2. CloudTrail displays recent AWS activity.
+3. Review the available events.
+
+The Event History page displays information such as:
+
+* Event time
+* Username
+* Event name
+* Event source
+* Resource type
+* Resource name
+
+<img width="1919" height="946" alt="image" src="https://github.com/user-attachments/assets/8f7876e1-024c-432a-bd60-c55fa1aac25c" />
 
 ---
 
-## Step 2: Select the S3 Bucket
+# PART B - ANALYZE A CLOUDTRAIL EVENT
 
-1. Click **Buckets**.
-2. Select the S3 bucket created in the previous experiment.
-3. Record:
-   - Bucket name
-   - AWS Region
-   - Number/type of objects
+## Step 3: Select an Event
 
-<img width="1536" height="960" alt="Screenshot 2026-08-25 103950" src="https://github.com/user-attachments/assets/3d9d0280-264b-435a-b639-9b2204494c31" />
+From the Event History list, an S3-related event was selected.
 
----
+The event selected was:
 
-## Step 3: Check Block Public Access
+**CreateBucket**
 
-1. Open the S3 bucket.
-2. Select **Permissions**.
-3. Locate **Block public access (bucket settings)**.
-4. Check **Block all public access**.
+The event details were opened and analyzed.
 
-### Record
-
-- **ON** → Secure configuration
-- **OFF** → Potential public-access risk
-
-<img width="1535" height="960" alt="Screenshot 2026-08-25 104020" src="https://github.com/user-attachments/assets/f9c101ca-dcb7-4792-82e8-5db31c62ad7f" />
-
----
-
-## Step 4: Check Bucket Versioning
-
-1. Select the **Properties** tab.
-2. Locate **Bucket Versioning**.
-3. Record whether it is:
-   - Enabled
-   - Disabled
-
-### Security Purpose
-
-Versioning helps recover previous versions of objects after accidental deletion or modification.
-
-<img width="1536" height="960" alt="Screenshot 2026-08-25 104633" src="https://github.com/user-attachments/assets/0654c1ff-f5db-4683-be2e-d67e67f94929" />
-
----
-
-## Step 5: Check Default Encryption
-
-1. Stay in the **Properties** tab.
-2. Locate **Default encryption**.
-3. Record the encryption type.
-
-### Possible Configurations
-
-- SSE-S3
-- SSE-KMS
-- DSSE-KMS
-
-### Security Purpose
-
-Encryption protects stored data from unauthorized disclosure.
-
-<img width="1536" height="960" alt="Screenshot 2026-08-25 104731" src="https://github.com/user-attachments/assets/18eeb0a4-b810-4d13-9e0b-ade6de998471" />
-
----
-
-## Step 6: Check Bucket Policy
-
-1. Select **Permissions**.
-2. Locate **Bucket policy**.
-3. Check whether a bucket policy exists.
-
-### Record
-
-- Policy exists
-- No policy
-
-> **Note:** A missing bucket policy is not automatically a vulnerability. Access may be controlled through IAM and other AWS security mechanisms.
-
-<img width="1524" height="958" alt="Screenshot 2026-08-25 104832" src="https://github.com/user-attachments/assets/5d8f0ce2-2679-4924-a8d8-5832fc29bf7b" />
-
----
-
-## Step 7: Check Object Ownership and ACL
-
-1. In **Permissions**, locate **Object Ownership**.
-2. Record the current configuration.
-
-A common secure configuration is:
-
-**Bucket owner enforced**
-
-This means:
-
-- ACLs are disabled.
-- Objects are owned by the bucket owner.
-- Access is controlled using policies.
-
-<img width="1535" height="960" alt="Screenshot 2026-08-25 104914" src="https://github.com/user-attachments/assets/5a979c97-ea99-46b0-8273-a9617964783a" />
-
----
-## Step 8: Check Server Access Logging
-
-1. Go to **Properties**.
-2. Locate **Server access logging**.
-3. Record whether it is:
-   - Enabled
-   - Disabled
-
-### Security Purpose
-
-Logging helps investigate suspicious or unauthorized access to the bucket.
-
-<img width="1536" height="960" alt="Screenshot 2026-08-25 105006" src="https://github.com/user-attachments/assets/aa7022b5-08da-4f3c-b92e-e965a1ee1d2d" />
-
----
-
-
-## Step 7: Check Object Ownership and ACL
-
-1. In **Permissions**, locate **Object Ownership**.
-2. Record the current configuration.
-
-A common secure configuration is:
-
-**Bucket owner enforced**
-
-This means:
-
-- ACLs are disabled.
-- Objects are owned by the bucket owner.
-- Access is controlled using policies.
-
-<img width="1536" height="960" alt="Screenshot 2026-08-25 105042" src="https://github.com/user-attachments/assets/f0286acb-931f-42a1-9fc9-dae10141f4cb" />
-
----
+<img width="1904" height="935" alt="image" src="https://github.com/user-attachments/assets/586eaa12-9aba-45b2-87d1-b492e05637e9" />
 
 
 ---
 
-# PART B — AWS RISK ASSESSMENT
+## Step 4: Analyze the CreateBucket Event
 
-After checking the S3 configuration, identify possible vulnerabilities and threats.
+The **CreateBucket** event indicates that an Amazon S3 bucket creation operation occurred.
 
-## Risk Formula
+| Parameter        | Observation                           |
+| ---------------- | ------------------------------------- |
+| **Event Time**   | August 05, 2026, 11:08:42 (UTC+05:30) |
+| **User Name**    | root                                  |
+| **Event Name**   | CreateBucket                          |
+| **Event Source** | s3.amazonaws.com                      |
+| **AWS Region**   | ap-south-1                            |
+| **Read-only**    | false                                 |
+| **Error Code**   | -                                     |
+| **Activity**     | S3 bucket creation                    |
 
-**Risk Score = Likelihood × Impact**
+### Meaning of Important Fields
 
-### Likelihood Scale
-
-| Score | Description |
-|---:|---|
-| 1 | Very Low |
-| 2 | Low |
-| 3 | Medium |
-| 4 | High |
-| 5 | Very High |
-
-## AWS Risk Assessment
-
-> Students must use their actual configuration while preparing the final table.
-
-| Asset | Vulnerability | Threat | Likelihood | Impact | Risk Score | Risk Level | Recommended Mitigation |
-|---|---|---|---:|---:|---:|---|---|
-| S3 Bucket | Versioning disabled | Accidental/malicious data deletion | 3 | 4 | 12 | High | Enable versioning |
-| S3 Bucket | Access logging disabled | Difficult investigation of unauthorized activity | 3 | 3 | 9 | Medium | Enable appropriate logging |
-| S3 Bucket | Public access enabled | Unauthorized data access | 4 | 5 | 20 | Critical | Enable Block Public Access |
-| S3 Bucket | Weak access permissions | Unauthorized modification/access | 3 | 4 | 12 | High | Apply least privilege |
+| Field            | Meaning                                                                    |
+| ---------------- | -------------------------------------------------------------------------- |
+| **Event Time**   | Time at which the activity occurred                                        |
+| **User Name**    | User or identity associated with the activity                              |
+| **Event Name**   | AWS operation that was performed                                           |
+| **Event Source** | AWS service that generated the event                                       |
+| **AWS Region**   | Region where the activity occurred                                         |
+| **Read-only**    | Indicates whether the event was only a read operation or involved a change |
+| **Error Code**   | Indicates whether an error occurred during the operation                   |
 
 ---
 
-Risk scores were calculated using the **Likelihood × Impact** method, and appropriate security mitigation measures were recommended.
+# PART C - IDENTIFY ANOTHER CLOUDTRAIL EVENT
+
+## Step 5: Select Another Event
+
+1. Return to **CloudTrail → Event history**.
+2. Select another event.
+3. Open its details.
+4. Record the important fields.
+
+The second event selected was:
+
+**AutomatedDefaultVpcCreation**
+
+This event is associated with **Amazon EC2** and represents automated creation of the default VPC infrastructure.
+
+<img width="1907" height="942" alt="image" src="https://github.com/user-attachments/assets/6a12287f-aa41-4aec-87b4-fad3b039a978" />
 
 
-## Result
+---
 
-~~~
-AWS S3 security configurations were analyzed and potential risks were identified.
-Risk levels were assessed and suitable security measures were recommended. 
-~~~
+## Step 6: Analyze the Second Event
 
+| Parameter        | Observation                           |
+| ---------------- | ------------------------------------- |
+| **Event Time**   | August 05, 2026, 11:25:21 (UTC+05:30) |
+| **User Name**    | -                                     |
+| **Event Name**   | AutomatedDefaultVpcCreation           |
+| **Event Source** | ec2.amazonaws.com                     |
+| **AWS Region**   | ap-south-1                            |
+| **Read-only**    | false                                 |
+| **Error Code**   | -                                     |
+| **Activity**     | Automated Default VPC creation        |
 
+---
 
+# PART D - COMPARE THE EVENTS
+
+## Step 7: Prepare the Audit Comparison
+
+The two CloudTrail events were compared as follows:
+
+| Parameter        | Event 1                   | Event 2                        |
+| ---------------- | ------------------------- | ------------------------------ |
+| **Event Time**   | August 05, 2026, 11:08:42 | August 05, 2026, 11:25:21      |
+| **User Name**    | root                      | -                              |
+| **Event Name**   | CreateBucket              | AutomatedDefaultVpcCreation    |
+| **Event Source** | s3.amazonaws.com          | ec2.amazonaws.com              |
+| **AWS Region**   | ap-south-1                | ap-south-1                     |
+| **Read-only**    | false                     | false                          |
+| **Error Code**   | -                         | -                              |
+| **Activity**     | S3 bucket creation        | Automated Default VPC creation |
+
+---
+
+# PART E - SECURITY AUDIT ANALYSIS
+
+## Step 8: Identify Who, What, When and Where
+
+### Event 1 — CreateBucket
+
+| Question    | Answer                            |
+| ----------- | --------------------------------- |
+| **WHO?**    | root                              |
+| **WHAT?**   | CreateBucket — S3 bucket creation |
+| **WHEN?**   | August 05, 2026, 11:08:42         |
+| **WHERE?**  | ap-south-1                        |
+| **RESULT?** | Successful — No error code        |
+
+### Event 2 — AutomatedDefaultVpcCreation
+
+| Question    | Answer                                                       |
+| ----------- | ------------------------------------------------------------ |
+| **WHO?**    | - (AWS automated service activity)                           |
+| **WHAT?**   | AutomatedDefaultVpcCreation — Automated Default VPC creation |
+| **WHEN?**   | August 05, 2026, 11:25:21                                    |
+| **WHERE?**  | ap-south-1                                                   |
+| **RESULT?** | Successful — No error code                                   |
+
+---
+
+# Step 9: Final Audit Table
+
+| Parameter      | Event 1                   | Event 2                        |
+| -------------- | ------------------------- | ------------------------------ |
+| **Event Time** | August 05, 2026, 11:08:42 | August 05, 2026, 11:25:21      |
+| **User**       | root                      | -                              |
+| **Event Name** | CreateBucket              | AutomatedDefaultVpcCreation    |
+| **Service**    | Amazon S3                 | Amazon EC2                     |
+| **Region**     | ap-south-1                | ap-south-1                     |
+| **Read-only**  | false                     | false                          |
+| **Result**     | Successful                | Successful                     |
+| **Activity**   | S3 bucket creation        | Automated Default VPC creation |
+
+---
+
+# RESULT
+
+The cloud activities in AWS were successfully audited using **AWS CloudTrail Event History**. Two different AWS events, **CreateBucket** and **AutomatedDefaultVpcCreation**, were examined and compared based on event time, user identity, event name, event source, AWS Region, read-only status, and error status.
+
+The experiment demonstrated how **AWS CloudTrail provides an audit trail for monitoring, accountability, security auditing, and investigation of cloud activities**.
